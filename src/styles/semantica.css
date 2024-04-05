@@ -1,0 +1,62 @@
+ 
+ 
+
+header {
+    background-color: burlywood;
+}
+
+main { 
+    background-color:cornsilk;
+
+}
+
+footer { 
+    background-color: bisque;
+}
+
+ul.lista li:hover {
+    background-color: red;
+}
+
+ul.lista :not(li:hover):hover {
+    color: gray;
+}
+
+footer:hover,
+main:hover,
+header:hover {
+    background-color: yellow;
+}
+
+
+.tooltip {
+
+    --positionX: 0;
+    --positionY: 0;
+    display: block;
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    top: 20px;
+    left: 20px;
+    background-color: aqua;
+}
+
+.tooltip::before {
+    content: "tooltip";
+}
+
+.tooltip:hover {
+    background-color: red;
+}
+ pre  {
+     width: 90%;
+     padding: 5px;
+     margin: auto auto;   
+     border-radius: 5px;
+ }
+ code{
+    background-color:black;
+    color: white;
+ }
+

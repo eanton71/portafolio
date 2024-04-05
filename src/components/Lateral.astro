@@ -1,0 +1,38 @@
+---
+const path = Astro.url.pathname;
+//mostrar menu para pagina actual getHeadings astro
+const links = await Astro.glob("/src/pages/**/**.mdx");
+---
+
+<style>
+   
+  nav ul {
+    list-style-type: none;
+  }
+  nav ul li {
+  }
+   
+  nav ul li:hover {
+    background-color: aqua;
+  }
+</style>
+<aside class="lateral">
+    {path}
+  <nav>
+    <ul>
+      {//recortar la url para que solo salga css o html
+        path !="/" ? (
+        links
+        //.filter((lnk) => lnk.url.split("/").length>=3 )
+         .filter((lnk) => lnk.url.includes(path.toString()))         
+          .map((link) => (
+            <li>
+              <a href={link.url + "/"}>{link.frontmatter.title} </a>
+            </li>
+          ))
+         ):""
+      }
+    </ul>
+  </nav>
+</aside>
+

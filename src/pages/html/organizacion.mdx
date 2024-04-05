@@ -1,0 +1,47 @@
+---
+layout: ../../layouts/MDXLayout.astro
+title: Organización
+---
+
+
+## Listas 
+### Desordenadas
+- `<ul></ul>` : contiene una lista desrodenada . Los elementos se muestran con una marca.
+- `<li></li>`: cada elemento de la lista. El cierre`</li>`puede omitirse. 
+
+### Ordenadas
+- `<ol></ol>`:lista ordenada. Pone delante de cada elemento desde el 1 en adelante por defecto. 
+    - **Atributos**:
+    - `reversed`: numeración en orden desdcendente (4,3,2,1). `start ="8"`empieza a contar desde el 8.
+    - `start`: número asignado al primer elemento a partir del que se cuenta. Siempre numero aunque se muestren numeros romanos. 
+    - `type`: **a** letras minusculas | **A** mayusculas | **i** numeros romanos en minusculas | **I** romanos en mayusculas | **1** numeros (por defecto)
+- Tambien contiene elementos `<li>`. *Atributos*: `value="34"`  asigna un valor al elemento. Si   los siguientes no llevan value, estos contaran a partir del anterior. Independientemente del `type` llevara un numero siempre. 
+### De descripciones 
+- `<dl></dl>`: encierran unaa lista de definiciones.
+- `<dt></dt>`: termino a describir. Puede estar seguido por ninguna, una o varias descripciones. (Ejemplo : varios sinonimos de un mismo termino)
+- `<dd></dd>`: descripcion desarrollada sobre el termino `<dt>`.  
+### `<menu>` 
+Tiene el mismo comportamiento que una lista desordenada pero se usa semanticamente para denominar un menu.
+
+<p class="codepen" data-height="300" data-default-tab="html,result" data-slug-hash="LYveNeQ" data-user="eanton71" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+  <span>See the Pen <a href="https://codepen.io/eanton71/pen/LYveNeQ">
+  listas</a> by Enrique Antón López (<a href="https://codepen.io/eanton71">@eanton71</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
+
+## Tablas
+
+## Desplegables 
+
+```html 
+<details>
+
+</details>
+
+``` 
+
+docuemnt.elemet/()sdfds;
+imagen con enlaces
+map
+area

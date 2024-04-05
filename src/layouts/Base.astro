@@ -1,0 +1,34 @@
+---
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import Lateral from "../components/Lateral.astro";
+import Main from "../components/Main.astro";
+import "../styles/global.css";
+const { title, css } = Astro.props.frontmatter || Astro.props;
+---
+
+<!doctype html>
+<html lang="es-ES">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=1"
+    />
+    <slot name="head" />
+    <title>{title}</title>
+  </head>
+  <body contenteditable ="true" spellcheck="true">
+    <Header msg="header" />
+
+    <Main>
+      <Lateral />
+      <section class="mainR">
+        <h1>{title}</h1>
+        <slot />
+      </section>
+    </Main>
+    <Footer msg="footer" />
+  </body>
+</html>

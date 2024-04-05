@@ -1,0 +1,75 @@
+* {
+    font-family: "Helvetica Neue", Helvetica, Arial;
+    line-height: 1.5em;
+    box-sizing: border-box;
+}
+
+:root {
+    --wBody: 100vw;
+    --hBody: 100vh;
+    --hFooter: calc((var(--hBody) * 0.05));
+    --hHeader: calc((var(--hBody) * 0.05));
+    --hMain: calc((var(--hBody) * 0.9));
+
+}
+
+body {
+    width: var(--wBody);
+    height: var(--hBody);
+    margin: auto;
+}
+
+header {
+    width: var(--wBody);
+    height: var(--hHeader);
+    background-color: burlywood;
+}
+:root::grammar-error {
+    text-decoration-line: grammar-error;
+}
+:root::spelling-error {
+    text-decoration-line: spelling-error;
+    color: rgb(255, 0, 25); 
+}
+main {
+   /* width: var(--wBody);*/
+    height: var(--hMain);
+    background-color: darkgray;
+    display: flex;
+    justify-content: baseline;
+
+}
+
+.mainR {
+    width: calc(var(--wBody)*0.8);
+    height: var(--hMain);
+    background-color: hsl(110 75% 75%);
+    overflow: auto;
+    padding: 1em;
+}
+
+.lateral {
+    width: calc(var(--wBody) * 0.2);
+    height: var(--hMain);
+    background-color: rgb(200, 250, 207);
+    overflow: auto;
+    padding: 1em;
+}
+
+footer {
+    width: var(--wBody);
+    height: var(--hFooter);
+    background-color: blanchedalmond;
+}
+
+
+pre {
+    width: 90%;
+    padding: 5px;
+    margin: auto auto;
+    border-radius: 5px;
+}
+
+code {
+    color: darkslategrey;
+}

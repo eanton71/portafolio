@@ -1,0 +1,21 @@
+---
+const { url } = Astro.props;
+const findicon = "https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=";
+---  
+
+ 
+<style  >
+img{
+    filter: grayscale(100%)  drop-shadow(1px 1px 2px black);
+} 
+a:hover img{
+    filter: grayscale(0%)  drop-shadow(1px 1px 2px red);
+}
+</style>
+  
+
+<a href={url}> 
+    <img src={findicon+url}>
+    {url}
+</a>
+ <br>

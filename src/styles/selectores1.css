@@ -1,0 +1,13 @@
+h2:hover {
+    text-decoration: underline 5px dotted red;
+}
+.hover:hover{
+    color: brown;
+    text-decoration-line: underline;
+}
+.hover:hover + .hover2{
+   visibility: visible;
+}
+.hover2{
+    visibility: hidden;
+}

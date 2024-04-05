@@ -1,0 +1,32 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #c9d2fc;
+}
+nav{
+position: fixed;
+height: 100%;
+width: 250px;
+}
+nav header{font-size: 2em;text-align: center;}
+nav  a{
+    display: block;
+    border: 1px solid #303650;
+    font-size: 1.5em;
+    padding: 5px;
+}
+main{ 
+    margin-left: 260px;
+    height: 100%;
+    position: absolute;
+}
+.main-section{
+border: 1px solid #303650;
+}
+.main-section header{
+    font-size: 1.5em;
+    text-align: center;
+    padding: 10px;
+}

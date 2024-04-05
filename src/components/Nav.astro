@@ -1,0 +1,40 @@
+---
+const links = await Astro.glob("/src/pages/{**/index.mdx,index.mdx,links.mdx}");
+---
+
+<style>
+   
+  nav ul {
+    list-style-type: none;
+    margin-block: 0;
+    padding-inline:0;
+    margin-inline: 0;
+    display: inline;
+  }
+  nav ul li {  
+    float: left;
+  }
+  nav ul li a {
+    font-size: 1.5em; 
+    margin: auto 10px;
+  }
+  nav ul li:hover  {
+    background-color: aqua;
+  }
+   
+</style>
+
+<nav>
+  <ul>
+    {
+      links.map((link) => (
+         
+          <li>
+            <a href={link.url+"/"}>{link.frontmatter.title} </a>
+            </li>
+         
+      ))
+    }
+  </ul>
+   
+</nav>

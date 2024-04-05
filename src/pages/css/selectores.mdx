@@ -1,0 +1,139 @@
+---
+layout: ../../layouts/MDXLayout.astro
+title: Selectores 
+---
+
+
+
+## Reglas css
+- Constan de un `selector` que determina el elemento sobre el que se aplica el estilo y entre llaves,  una serie de declaraciones que  definen estos.
+- `*`: selector universal, todos los elementos
+- `div`:  de tipos, selecciona todos los elementos con esta etiqueta
+- `.clase`: todos los elementos que tengan esa clase `<span class="clase">...</span>` . El punto solo se pone en `css`. El elemento puede contener varias clases separadas por espacios entre las comillas`<p class="clase1 clase2">..`
+- `#id`: solo lo puede tener un elemento en la pagina. No es recomendable por esta razón. 
+- `[href="/"]`: selecciona todos los elementos que contengan este atributo. 
+    - `[data-name="dataName" s]`: con `s` para que distinga mayusculas de minúsculas. 
+    - `[href*="web.com"]`: con __*__ todos los que __contienen__ **web.com**
+    - `[href^="https"]`: con __^__  todos los que __empiezan__ por __https__.
+    - `[href$=".com"]`: con __$__, todos los que __acaban__ por __.com__. 
+- Los selectores se pueden agrupar . Así se les aplica el mismo estilo a todos: color azul en el texto.   
+```css
+span,
+.clase1,
+#id
+[src]{
+    color: #blue;
+    ...
+}
+```
+## Combinadores
+- `_`: **espacio**, `div .class {}`. Selecciona todos los elementos, clases, ids,.. contenidos en el primer selector de forma recursiva (elementos  contenidos a su vez).
+- `>`: `.class > div`. Selecciona los contenidos en el siguiente nivel  
+- `+`: `li +  li`. Siguiente elemento en el mismo nivel
+- `~`: `a ~ a`. Todos los siguientes elementos en el mismo nivel. 
+- `* `: selector universal. Selecciona todos los elementos o si se coloca detrás de un elemento, todos los hijos de este `.class *`
+## Pseudo-clases   
+## Según cumplan ciertas condiciones
+- `:is()`: como agrupar varios elementos por comas. Para ahorrar código y organizarse. Ejemplo: `div :is(ul,p){}` es equivalente a `div ul, div p {}`. La especificidad sera la mas alta de todos los elementos
+- `:where()`: igual que el anterior pero tiene especificidad 0 
+- `:not()`:  los que no estén entre los parámetros de búsqueda. Estos pueden ser elementos, clases, selectores con pseudo-clases, ... También se pueden encadenar. 
+- `:has()`: permite parametros complejos por lo que resulta muy potente. `div:has(> p)`, selecciona los `div`que contengan parrafos. 
+<p class="codepen" data-height="300" data-default-tab="html,result" data-slug-hash="oNOzoGV" data-preview="true" data-editable="true" data-user="eanton71" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+  <span>See the Pen <a href="https://codepen.io/eanton71/pen/oNOzoGV">
+  CSS pseudoclases is not where has</a> by Enrique Antón López (<a href="https://codepen.io/eanton71">@eanton71</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
+### Con comportamiento 
+- `:hover`:  <span class="hover">pasa el raton</span><span class="hover2">ahora me ves</span>
+- `:active`: desde que se presiona un elemnto con el raton hasta que se deja de presionar. Enlaces, botones,.. 
+- `:focus`: cuando un elemento tiene el foco (se ha hecho click, tiene el foco por la tecla Tab,..) por  ejemplo un input
+- `:focus-within`: recibe el foco o contiene un elemento que recibe el foco. `:
+- `:focus-visible`: el elemento recibe el foco mediante la tecla Tab (importante para accesibilidad) . `:focus` deberia tener la declaracion `outline: none` para qe no se vea afectada por el raton
+<p class="codepen" data-height="300" data-default-tab="html,result" data-slug-hash="LYvVvQJ" data-preview="true" data-editable="true" data-user="eanton71" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+  <span>See the Pen <a href="https://codepen.io/eanton71/pen/LYvVvQJ">
+  CSS_Selectores</a> by Enrique Antón López (<a href="https://codepen.io/eanton71">@eanton71</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
+### De navegacion
+- `:link`: enlace no visitado aun
+- `:visited`: ya visitado
+- `:any-link`: cualquier enlace
+- `:target`:  selecciona  el elemento que lleva el id al que apunta el enlace con su ancla(id). 
+- otros: `:local-link`
+<p class="codepen" data-height="300" data-default-tab="html,result" data-slug-hash="YzMWERw" data-preview="true" data-editable="true" data-user="eanton71" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+  <span>See the Pen <a href="https://codepen.io/eanton71/pen/YzMWERw">
+  CSS_selectors_links</a> by Enrique Antón López (<a href="https://codepen.io/eanton71">@eanton71</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
+### De formularios
+- `:disabled`: `:enabled`: elementos input|button que están deshabilitados | habilitados 
+- `:read-only`: input o submit con atributo readonly , no se pueden editar (se presenta información al usuario con el objetivo de que la compruebe pero no pueda editarla) , `:read-write`: que se pueden editar y tambien `<p>`y `<span>`con el atributo `contenteditable`. 
+- `:checked`:  elemento seleccionable marcado (checked).  `:indeterminated`: cuando hay un elemento a medias (porque tiene varios checked y no todos estan seleccionados). Inputs `radio` (uno esta seleccionado pero otro no). Barras de progreso sin valor definido. 
+- `:valid`, `:invalid` : por ejemplo en la comprobación de correos electrónicos con el formato adecuado (`input email`). `:user-valid`, `:user-invalid`: en el caso de que el usuario haya interactuado antes con el formulario. 
+- `:in-range`, `:out-of-range`: : input con valores min-max cuando la entrada entra dentro | fuera de ese rango  . 
+- `:placeholder-shown`: inputs cuyo atributo **placeholder** tiene contenido. 
+- `:required`: elementos de formulario que deben ser rellenados (con atributo **required**) `:optional`: los que a su vez no hace falta que sean rellenados. 
+- `:default`: que tienen un valor por defecto (`checked` con el atributo **checked**, `selected` con el atributo **selected**,..). 
+### Seleccion segun el orden de los elementos
+- `:first-child` , `:last-child`: primer hijo y ultimo hijo. Sintaxis: `p:first-child` primer elemento p contenido en cualquier otro. 
+- `:nth-child(n)`:  busca el elemento en la posición `n`. n puede ser un numero, `even`|`odd` (impares, pares),  una expresión del tipo X*n + Y (a partir del elemento Y los elementos X*n: 2n+3 -> desde el tercero los pares ).
+- `:nth-of-type(n)`: 
+- `:only-child`: elementos que son únicos. Sintaxis: `li:only-child`, buscara los elementos li que esten solos. 
+- `:first-of-type` , `:last-of-type`: selecciona el primero o el ultimo del tipo. Sintaxis: `.container p:first-of-type`, primer elemento `<p>`dentro de la clase .container. 
+- `:root` : hace referencia al elemento `<html>` pero tiene una especificidad mas alta  __(0,1,0)__ que este __(0,0,1)__. Se puede usar para definir variables globales `--var`. 
+- `:empty` : todos los elementos que no tienen elementos hijos.
+### Por idiomas
+- `:lang(idioma)`: cambia el estilo según el idioma del texto (definido por el atributo lang que se integra el la etiqueta del párrafo) . Parametros: 'es-ES', 'en-US', 'en-GB', 'fr-FR', 'es','en', 'es-*', permite varios lenguajes. 
+- `:dir(dirección`: ltr: left to right, rtl:right to left, selecciona el texto según su orientación. Puede venir  definida esta en el atributo dir="ltr|rtl|auto", .En auto, por ejemplo, con idioma hebreo o árabe lo toma de derecha a izquierda. 
+## Interacción con pantalla 
+- `:fullscreen`:	  si la página está en modo de pantalla completa.
+- `:modal`: `<dialogs>` que bloquean la interacción hasta que se les haga click. 
+<p class="codepen" data-height="300" data-default-tab="html,result" data-slug-hash="BaEKeXK" data-preview="true" data-editable="true" data-user="eanton71" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+  <span>See the Pen <a href="https://codepen.io/eanton71/pen/BaEKeXK">
+  CSS_pseudoclases_segun_orden</a> by Enrique Antón López (<a href="https://codepen.io/eanton71">@eanton71</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
+
+### Para impresión MEDIA QUERIES
+:left: Selecciona elementos que se muestran en la pantalla izquierda en una disposición de dos columnas.
+:right: Selecciona elementos que se muestran en la pantalla derecha en una disposición de dos columnas.
+:first: Selecciona el primer elemento en una disposición de dos columnas.
+:last: Selecciona el último elemento en una disposición de dos columnas.
+:animated: Selecciona elementos que están siendo animados.
+:transition: Selecciona elementos que están siendo afectados por una transición CSS.
+:print: Selecciona elementos que se muestran en una vista de impresión.
+## Pseudoelementos
+
+### Añadir contenido 
+- `::before`: Añade contenido al principio de un elemento de lista, un párrafo, ...
+- `::after`: Igual pero al final.
+- `::marker`: aplica un estilo diferente a las marcas de las listas y elementos `<summary>`. 
+- Se usan junto con propiedad  `content`: se le puede añadir texto, o parámetros a través de funciones:
+  - `attr(atributo)`
+  - `url("ruta a imagen")`
+  - `counter(contador, estilo)`: se inicializa con __contador__ (o cualquier otro nombre) y se le puede aplicar  un __estilo__ .
+    - A su vez tiene tres propiedades: `counter-set: contador`, `counter-reset: contador`, `counter-increment:contador incremento`  
+  - También se pueden aplicar funciones de imagen: `linear-gradient`, `image-set`.. 
+  - Se pueden combinar varios
+<p class="codepen" data-height="300" data-default-tab="html,result" data-slug-hash="BaEKWrv" data-preview="true" data-editable="true" data-user="eanton71" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+  <span>See the Pen <a href="https://codepen.io/eanton71/pen/BaEKWrv">
+  before_after</a> by Enrique Antón López (<a href="https://codepen.io/eanton71">@eanton71</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
+### Modificar contenido
+- `::first-letter`: Aplica estilo  a la primera letra de un párrafo . Se aplica a elementos en _bloque_ (que ocupan todo el ancho del contenedor, los siguientes se colocan debajo)
+- `::first-line`: Lo mismo a la primera linea. Se aplica si el elemento tiene display: `block inline-block list-item table-capotion table-cell`.
+- `::backdrop`: se aplica el fondo que se ve detrás del elemento al qu se aplica el pseudoelemento. 
+- `::placeholder`: aplica estilo a los `input` con este atributo. 
+- `::file-selector-button`: para el input con botón. 
+- `::cue`: aplica estilo a las leyendas que se leen en los videos de los elementos `<video>` . Se les puede pasar un selector de estas leyendas `::video::cue(b)`.
+### Resaltar contenido
+- `::selection`:  Aplica estilo al texto seleccionado por el usuario. No se aplica a ningún elemento en concreto. Se declara tal cual. 
+- `::spelling-error`: aplica un estilo a las palabras que contengan errores ortográficos en los parrafos con el atributo `spellcheck="true"`. __!Experimental!__
+- `::grammar-error`: para errores gramaticales. __!Experimental!__
+

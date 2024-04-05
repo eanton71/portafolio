@@ -1,0 +1,53 @@
+---  
+layout: ../../layouts/MDXLayout.astro 
+title: Expresiones regulares
+--- 
+<script>
+const texto = "Al despuntar la aurora, hazte estas consideraciones previas: me
+encontraré con un indiscreto, un ingrato, un insolente, un mentiroso, un
+envidioso, un insociable. Todo eso les acontece por ignorancia de los bienes
+y de los males. Pero yo, que he observado que la naturaleza del bien es lo
+bello, y que la del mal es lo vergonzoso, y que la naturaleza del pecador
+mismo es pariente de la mía, porque participa, no de la misma sangre o de la
+misma semilla, sino de la inteligencia y de una porción de la divinidad, no
+puedo recibir daño de ninguno de ellos, pues ninguno me cubrirá de
+vergüenza; ni puedo enfadarme con mi pariente ni odiarle. Pues hemos
+nacido para colaborar, al igual que los pies, las manos, los párpados, las
+hileras de dientes, superiores e inferiores. Obrar, pues, como adversarios los
+unos de los otros es contrario a la naturaleza. Y es actuar como adversario el
+hecho de manifestar indignación y repulsa.";
+</script>
+
+## Definicion   
+- `const er = /ab+c/i;`   
+- `const er = new RegExp("ab+c", "i");`
+- `const er = new RegExp(/ab+c/, "i");`
+## Propiedades
+- .source	Devuelve la expresión regular original definida (sin los flags).
+- .flags	Devuelve los flags activados en la expresión regular.
+- .lastIndex	Devuelve la posición donde detectó una ocurrencia en la última búsqueda. (Ver más adelante)
+## Flags
+- **g** .global		Búsqueda global. Permite seguir buscando coincidencias en lugar de pararse al encontrar una.
+- **i** .ignoreCase		Le da igual mayúsculas y minúsculas. Se suele denominar insensible a mayús/minús.
+- **m** .multiline		Multilínea. Permite a ^ y $ tratar los finales de línea \r o \n.
+- **u** .unicode		Unicode. Interpreta el patrón como un código de una secuencia Unicode.
+- **v** .unicodeSets
+- **y** .sticky		Sticky. Busca sólo desde la posición indicada por lastIndex.
+- **s** .dotAll		Establece si \n, \r, separación de párrafo o separación de línea deberían considerarse en los .
+- **d** .hasIndices		Establece si al ejecutar un .exec() el resultado deberá tener propiedad .indices.
+## Donde se usa
+### Funciones
+boolean RegExp.test(texto donde buscar) . Retona true en caso de encontrar alguna coincidencia
+Array RegExp.exec(texto donde buscar). Retorna un array 
+## Como se definen las expresiones regulares
+. cualquier caracter
+\ caracter de escape, permite incluir en la busqueda caracteres especiales `. ( ) [ ] ^ /` 
+[A-Za-z] busca cualquier uno de los caracteres que este incluido dentro. El guin `-` indica un rango de caracteres 
+[^] busca todo menos lo que este encorchetes
+a|b OR, busca a o b 
+
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Regular_expressions/Backreference
+https://es.javascript.info/regexp-introduction#expresiones-regulares
+https://developer.mozilla.org/es/docs/Web/JavaScript/Guide/Regular_expressions#herramientas
+https://regex101.com/
+https://extendsclass.com/regex-tester.html
