@@ -49,5 +49,11 @@
         }
       ]
     }
+  ],
+  "frontMatter.content.pageFolders": [
+    {
+      "title": "css",
+      "path": "[[workspace]]/src/pages/css"
+    }
   ]
 }

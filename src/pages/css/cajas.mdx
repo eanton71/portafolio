@@ -1,0 +1,116 @@
+---
+layout: ../../layouts/MDXLayout.astro
+title: Modelo de cajas 
+---
+import IconLink from  '../../components/IconLink.astro';
+ 
+//Hay que dejar espacio aqui
+<img src="/caja.svg" />
+
+## Dimensiones
+- `width` : ancho (px,mm,em: tamaño de fuente que haya en el elemento,..) o porcentaje (% respecto al **contenedor**) 
+- `height` : alto    ""      ""   
+- El calculo de estas varia dependiendo de la propiedad:
+    - `box-sizing`: **content-box**, por defecto. En este caso es el tamaño el contenido. A width o heigth habra que sumarles el grosor del borde * 2 mas el padding (relleno) * 2 (NO el ~MARGEN~). Height seria igual a height + grosor del borde * 2 mas padding superior + padding inferior. Por tanto si tenemos un ancho o alto derterminado para un objeto, si cambiamos el relleno o el borde cambiara el tamaño del objeto. 
+    - `box-sizing`: **border-box**. En este caso width y height tendran encuenta el relleno y el grosor del borde.  Si cambiamos el relleno o el obrde no cambiara le tamaño del objeto pero el contenido mengua.  
+- `max-width`: ancho maximo que puede tomar 
+- `min-width`: ancho minimo
+- `max-height`: altura maxima
+- `min-height`: altura minima
+### Adaptar el tamaño  al contenido
+- las propiedades `width` y `heigth` tambien pueden tomar los valores segun el contenido:
+    - `max-content` : para tener en cuenta el tamaño maximo del contenido . Un parrafo  se mostrara en una linea.
+    - `min-content` : para ajustar el tamaño al tamaño minimo que puede tomar el contenido. Un  parrafo se mostrara en varias lineas.
+    - `fit-content` : 
+
+### Overflow (que hacercon  el contenido que sobra:  barras de deplazamiento y mas)
+- `overflow`: se puede poner un parametro  o dos para x e y
+    - *visible*: el contenido se muestra por fuera de la caja 
+    - *hidden*: el contenido que no cabe se oculta (no desaparece). No se puede ver mediante barras de desplazamieto pero podria verse mediante enlaces de ancla por ejemplo. 
+    - *clip*: lo que no se puede ver desaparece 
+    - *scroll*: 
+- `overflow-x`:  solo para eje x
+- `overflow-y`:   "     "      y 
+- **Cuanto contenido se muestra por fuera** `overflow-clip-margin` (solo si se aplica `overflow: clip`)
+#### Modifiar apariencia del scroll
+- **Cambiar el color** `scrollbar-color`: *auto* | *color1* *color2*. Admite hasta dos colores
+- **Cambiar el grosor** `scrollbar-width`: auto | thin (estrecha) | none (no se muestra aunque si hay desplazamiento)
+- **Reserva de espacio para un scrollbar** `scrollbar-gutter`: *auto* | *stable* | *both-edges*. 
+ #### Mas opciones de scroll (sobre el contenido)
+- **Contenido aparece de manera rigida o suave** `scroll-behavior`: *auto* | *smooth*
+- **Margenes entre la posicion de ajuste del contenido y el contenedor**, cuando esta el scroll activado, se aplica al elemento contenido 
+    - **Cuatro coordenadas**, `scroll-margin`: 
+        - *top* *right* *bottom* *left* (unidades de logitud: px,em, mm,...) 
+        - *top* *(left  & right)* *bottom*
+        - *(top & bottom)* *(left & right)*
+        - *(top & bottom & left & right)*
+    - **Coordenadas especificas** `scroll-margin-bottom`,  `scroll-margin-left`, `scroll-margin-right`,  `scroll-margin-top`
+    - **Margen en direccion block**  `scroll-margin-block`: *end* *start* *(ud. longitud em, px, ...)* ACCESIBILIDAD Y OTROS ALFABETOS
+        - Especificas `scroll-margin-block-end`, `scroll-margin-block-start`
+    - **Margen direccion inline** `scroll-margin-inline`: *end* *start* *(ud. longitud em, px, ...)*
+        - Especificas `scroll-margin-inline-end`, `scroll-margin-inline-start`
+- **Relleno desde el contendor hasta la posicion de ajuste de los contenidos** `scroll-padding`, mismos valores y unidades que el anterior
+    - `scroll-padding-left`, `scroll-padding-right`, `scroll-padding-top`, `scroll-padding-bottom`
+    - **Relleno direccion block** `scroll-padding-block`
+        - `scroll-padding-block-end`, `scroll-padding-block-start`
+    - **Relleno direccio inline** `scroll-padding-inline`
+        - `scroll-padding-inline-end`, `scroll-padding-inline-start`
+- **Donde se quea parado el contenido respecto al borde del contenedor** `scroll-snap-align`: *none* | *start* (pegado el einicio del elemento con el borde del contedor) | *end* (final con final ) | *center*  (centrado en un elemento del contenido). 
+- **Para pantalas tactiles**,  `scroll-snap-stop`: *normal* | *always* 
+- **Exactitud en los puntos de ajuste durante el deplazamiento** `scroll-snap-type`: *( x | y )* *( mandatory | proximity)*
+
+- **ver mas:
+    - ** `overscroll-behavior`, `..-block`, `..-inline`, `..-x`, `..-y` , https://developer.mozilla.org/en-US/docs/Web/CSS/overscroll-behavior
+    - `overflow-anchor`,  `..-block`,  `..-inline`, 
+> mas info:
+> <IconLink url="https://developer.mozilla.org/en-US/docs/Web/CSS/overflow " />
+> <IconLink url="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_scrollbars_styling " />
+> <IconLink url="https://developer.chrome.com/docs/css-ui/scrollbar-styling?hl=es-419 " />
+> <IconLink url="https://drafts.csswg.org/css-scrollbars/ " />
+> <IconLink url="https://drafts.csswg.org/css-overflow/#scrollbar-gutter-property " />
+<p class="codepen" data-height="300" data-default-tab="html,result" data-slug-hash="poBLBKa" data-editable="true" data-user="eanton71" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+  <span>See the Pen <a href="https://codepen.io/eanton71/pen/poBLBKa">
+  caja</a> by Enrique Antón López (<a href="https://codepen.io/eanton71">@eanton71</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
+
+
+## Relleno 
+- **Relleno entre  el contenido y el borde del contenedor**, 
+    - **Cuatro coordenadas**, `padding`: 
+        - *top* *right* *bottom* *left* (unidades de logitud: px,em, mm,... y % porcentaje) 
+        - *top* *(left  & right)* *bottom*
+        - *(top & bottom)* *(left & right)*
+        - *(top & bottom & left & right)*
+    - **Coordenadas especificas** `padding-bottom`,  `padding-left`, `padding-right`,  `padding-top`
+- ***propiedades logicas  -> distintos alfabetos***: 
+- **Direccion block  en combinacion con la propiedad** `writing-mode` (arriba del texto o contenido -> abajo )
+    - `padding-block`: *start* *end* (px,em,%,...)  segun la orientacion del texto start y end estaran en sitios diferentes
+    - `..-end`, `..-start`
+- Direccion inline  en combinacion con la propiedad `writing-mode` (izquierda del texto o contenido -> derecha )
+    - `padding-inline`: *start* *end* (px,em,%,...)  
+    - `..-end`, `..-start`
+## Borde
+- **Comando abreviado que gestiona todas las opciones**,  `border`: *line-width* *line-style* *color* 
+    - *line-width* (ancho de linea): thin | medium | thick | longitud(px,mm,em,..)
+    - *line-style* (estilo de linea):   none | hidden | dotted | dashed | solid|  double | groove|  ridge | inset | outset
+    - *color*: nombre de color | RGB hex | rgb(R,G,B) | hsl(Hue,Saturation,Lightness) | hwb | lab | lch | light-dark(cLight,cDark)
+    - **Gestionar propiedades individuales**, 
+        - `border-width` (admite ademas longitud para coordenadas top right bottom left, top left-right bottom , top-bottom left-right), 
+        - **por cada coordenada: Top Right Bottom Left** `border-top-width`, `..-right-width`, `..-bottom-width`, `..-left-width`
+        - `border-style`,(admite coordendas de estilo de linea top right bottom left, ...)
+        - **por coordenadas** `border-top-style`, `..-bottom-style`,`..-right-style`,`..-left-style`
+        - `border-color` (coordendas de color tambien)
+        - **por coordenadas** `border-top-color`, `..-bottom-color`,`..-right-color`,`..-left-color`
+    - **gestionar el borde para cada coordenada**
+        - `border-bottom`, `..-top`,`..-right`,`..-left`: *line-width* *line-style* *color*
+## Margenes
+
+
+
+
+### Tener en cuenta las propiedades logicas que modifican el diseño de cajas
+
+ 
+ 

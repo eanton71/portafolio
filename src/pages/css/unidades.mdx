@@ -1,0 +1,44 @@
+---
+layout: ../../layouts/MDXLayout.astro
+title: Unidades
+---
+
+Permiten definir propiedades que representan distancias: width,height, , margin , padding o necesitan ser cuantificadas: font-size, text-shadow,..
+
+## Absolutas
+
+- **px**: pixeles. _1px = 1in / 96_
+- **cm**: centimetros. _1cm = 96px / 2.54_
+- **mm**: milimetros . _1mm = 1cm / 10_
+- **Q**: cuarto de mm _1Q = 1cm /40_
+- **in**: una pulgada, _1in = 2.54cm = 96px_. Igual a 96 pixeles por pulgada
+- **pc**: una pica, _1pc = 12pt = 1in / 6_
+- **pt**: un punto, _1pt = 1in / 72_
+
+## Relativas
+
+- ***%***: porcentaje respecto al contenedor. Si esta anidado en en elemento que tiene un height de 100px y le damos un height del 75%, le correspondera un tamaño de 75px. Si el elemento padre aumenta su height a 200px el elemento tendra entonces un height de 150px.
+
+### Respecto al tamaño de fuente
+
+- **em**: el tamaño establecido en font-size para la fuente usada en el elemento. O el tamaño establecido por defcto en el naegador, mas o menos 16px.
+- **ex**: tamaño de la x, _1ex ≈ 0.5em_
+- **ic**: basado en los caracteres **CJK** usados en chino, japones o coreano.
+- **lh**: euivale al valor que se le da a `line-height` (interlineado) en el elemento.
+- **cap**: segun el tamaño de la letra mayuscula de la fuente defiida en `font`
+- **ch**: ancho del **0**, mas o menos 0.5em por 1em de alto;
+- Precedidos de la r: **rem**, **rex**, **ric**, **rlh**, **rcap**, **rch**: se determinan respecto a las definiciones de `font-size`, `line-height`, .. situadas en el root `:root{}`, raiz del documento, y no en el elemento.
+
+### Respecto al viewport (parte visible de la pagina web en el navegador)
+
+- **vh**: _altura_ del viewport, va de 0 a 100 ya que se toma cmo un porcentaje. 75vh de un vieewport con height de 500px sera igual a 375px
+- **vw**: igual pero para definir la *anchura*.
+- **vmax**: porcentaje del mas _grande_ entre vh y vw
+- **vmin**: el mas _pequeño_ entre vh y vw
+- **vb**: porcentaje respecto al tamaño del bloque contenedor en la direccion del eje block (en nuestro alfabeto es la direccion vertical). Puede variar, MIRAR PROPIEDADES LOGICAS.
+- **vi**: igual en a direeccion del eje inline (direccion horizontal) que puede variar
+- hay cuatroi tamaños difentes de viewport: small (peueño), large (grade), dinamic (dinamico) y predeterminado. Se deben tener en cuenta ppara el diseño en dispositivos moviles sobre todo ya que el viewport en Escritorio es etable. En las pantallas moviles el viewport varia segun las barras de herramientas dinamicas. Segun se comkporten estas se añade un prefijo a las unidades:
+    - **s**: si se muestan las barras de herramientas (navegacion, sistema,...) svh,svw,svmax,...
+    - **l**: si no se muestran las barras de herramientas, lvh,lvw,lvmax,..
+    - **d**: si se muestra o no de forma dinamica, dvh,dvw,dvmax,...
+- mas info: [The large, small, and dynamic viewport units](https://web.dev/blog/viewport-units?hl=es-419)

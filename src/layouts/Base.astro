@@ -19,7 +19,7 @@ const { title, css } = Astro.props.frontmatter || Astro.props;
     <slot name="head" />
     <title>{title}</title>
   </head>
-  <body contenteditable ="true" spellcheck="true">
+  <body contenteditable ="false" spellcheck="true">
     <Header msg="header" />
 
     <Main>

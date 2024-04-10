@@ -2,28 +2,44 @@
 
 ---
 
-<script>
-
-</script>
 <div class="code-container">
-    
-
+  <div class="code-html"><slot /></div>
+  
+  <div class="code-css"><slot /></div>
+  <div class="code-js"><slot /></div>
+  <div class="code-vista"><slot /></div>
 </div>
 <style>
-.container{
+  .code-container {
     background-color: rgb(220, 237, 237);
     position: relative;
     width: 800px;
-    height: 100px;
+    height: 300px;
+    display: flex;
+  }
+  .code-html {
+    width: 25%;
+    background-color: aqua;
+    padding: 0%;
+  }
+  .code-css {
+    width: 25%;
+    background-color: azure;
+    padding: 0%;
+  }
+  .code.js {
+    width: 25%;
+    background-color: aquamarine;
+padding: 0%;  
 }
-[type=button]:hover{
-    background-color: blueviolet;
+  .code-vista {
+    width: 25%;
+  
+padding: 0%;
 }
-.container   [type=button]:hover{
-    background-color: blueviolet;
-}
-[type=button]:hover + [type=button]:not(:hover){
-    background-color: brown;
-}
- 
+  
 </style>
+<script></script>
+
+<!-- https://docs.astro.build/es/guides/markdown-content/#resaltado-de-sintaxis -->
+<!--https://lenguajehtml.com/html/agrupacion/etiqueta-html-pre/ -->
