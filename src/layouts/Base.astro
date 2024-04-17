@@ -4,7 +4,7 @@ import Footer from "../components/Footer.astro";
 import Lateral from "../components/Lateral.astro";
 import Main from "../components/Main.astro";
 import "../styles/global.css";
-const { title, css } = Astro.props.frontmatter || Astro.props;
+const { title, headings,  css } = Astro.props.frontmatter || Astro.props;
 ---
 
 <!doctype html>
@@ -17,13 +17,28 @@ const { title, css } = Astro.props.frontmatter || Astro.props;
       content="width=device-width, initial-scale=1.0, user-scalable=1"
     />
     <slot name="head" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+Display:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Calligraffitti&family=Noto+Sans+Display:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Calligraffitti&family=Noto+Sans+Display:ital,wght@0,100..900;1,100..900&family=Noto+Sans+Mono:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
     <title>{title}</title>
   </head>
-  <body contenteditable ="false" spellcheck="true">
+  <body contenteditable="false" spellcheck="true">
     <Header msg="header" />
 
     <Main>
-      <Lateral />
+      <Lateral headings={headings}/> 
       <section class="mainR">
         <h1>{title}</h1>
         <slot />

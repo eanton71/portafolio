@@ -1,5 +1,5 @@
 ---
-const { url } = Astro.props;
+const { url,txt } = Astro.props;
 const findicon = "https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=";
 ---  
 
@@ -16,6 +16,7 @@ a:hover img{
 
 <a href={url}> 
     <img src={findicon+url}>
+    <!--TODO poner aqui el texto  -->
     {url}
 </a>
  <br>

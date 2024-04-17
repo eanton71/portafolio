@@ -1,45 +1,300 @@
 ---
 layout: ../../layouts/MDXLayout.astro
-title: Strings
- 
+title: Strings 
 ---
+import IconLink from  '../../components/IconLink.astro';
+
+## Declaración de  strings
+- Se puede utilizar *comillas simples* ('),  *dobles* (") o *backticks* (acentos graves o invertidos)(`) para encerrar las cadenas:
+- Se debe poner el mismo carácter al inicio y al final del string
+```js 
+const s1 = 'comillas simples';
+const s2 = "comillas dobles";
+const s3 = `acento grave`;
+```
+- Los strings con comillas simples y dobles son equivalentes. Lo coherente es usar una de ellas y no mezclarlas.
+- Los strings declarados entre backticks se consideran `template literal` y tienen propiedades especiales
+### Concatenación de strings con +
+```js
+const greeting = "Hello";
+const name = "Chris";
+console.log(greeting + ", " + name); // "Hello, Chris"
+```
+### Objetos String 
+```js 
+const foo = new String("foo"); // Creates a String object
+console.log(foo); // [String: 'foo']
+typeof foo; // 'object'
+```
+```js
+const firstString = "2 + 2"; // Creates a string literal value
+const secondString = new String("2 + 2"); // Creates a String object
+eval(firstString); // Returns the number 4
+eval(secondString); // Returns a String object containing "2 + 2"
+```
+- En este caso la función eval ejecuta el string como código. `firstString` sera visto por esta com un string, sin embargo `secondString` sera visto como un objeto cuyo contenido no sera evaluado. 
+- Podemos acceder a la propiedad `length` del objeto
+```js 
+const hello = "Hello, World!";
+const helloLength = hello.length;
+hello[0] = "L"; // This has no effect, because strings are immutable
+hello[0]; // This returns "H"
+``` 
+
+### Concatenar number y string directamente
+```js 
+const name = "Front ";
+const number = 242;
+console.log(name + number); // "Front 242"
+```
+#### Conversion number->string y viceversa
+```js 
+const myString = "123";
+const myNum = Number(myString);
+console.log(typeof myNum);
+// number
+const myNum2 = 123;
+const myString2 = String(myNum2);
+console.log(typeof myString2);
+// string
+```
+### Secuencias de escape
+- "\xA9" // "©"
+- "\u00A9" // "©"
+
+### Template literal (backsticks)
+#### Multilinea sin \n 
+- Permiten **cadenas multilineas** (no usan el carácter \n para insertar varias lineas , las pone directamente en la linea siguiente)
+```js
+const ml_comillas = 'Desde este punto \n hay una doble tradición. \n Según el uno, Latino \n fue derrotado en la batalla,\n  e hizo la paz con Eneas, \n y, posteriormente, una \n alianza familiar. '
+const ml_backsticks = `Desde este punto 
+ hay una doble tradición. 
+Según el uno, Latino 
+fue derrotado en la batalla,
+e hizo la paz con Eneas, 
+ y, posteriormente, una 
+ alianza familiar. `
+```
+#### Concatenación sin + 
+- Se pueden concatenar strings sin necesidad del símbolo `+`.
+- Pueden contener incrustadas expresiones `${var1+var2}`con código en Javascript. 
+```js
+function espar(n){
+  return n%2 == 0;
+}
+var number =122141 
+console.log(`el numero  ${number} es ${espar(number)?`par`:`impar`}`)
+```
+<pre><samp>"el numero  122141 es impar"</samp></pre>
+#### incluir comillas dobles o simples
+```js 
+const goodQuotes1 = 'She said "I think so!"';
+const goodQuotes2 = `She said "I'm not going in there!"`;
+const bigmouth = 'I\'ve got no right to take my place…';
+```
+####  Template tags
+```js 
+function templateTag(literales, ...expresiones){...}
+```
+- Son funciones que se colocan antes del template literal 
+- literales son cadenas de texto
+- expresiones son variables o expresiones en javascript
+- El tag o nombre de función puede ser aparte de un identificador plano: cualquier expresión con precedencia superior a 16 (1).  
+```js 
+console.log`Hola`;  //["Hola"]
+console.log.bind(6,34)`Enlace`; //["Enlace"]
+new Function("console.log(arguments[0])")`new function`;  //["new function"]
+
+function recursividad(str, ...val) {
+  console.log(str, val);
+  return recursividad;
+}
+recursividad`una``dos``tres`;//["una"] ["dos"] ["tres"]
+```
+- No se pueden encadenar cadenas con `` que no tengan template tags.
+
+### Secuencias de escape en template literals
+- Permitidas:
+  - `\u` seguido de cualquier dígito decimal distinto de 0 o seguido de 0 y otro dígito decimal
+  - `\u{}` seguido de menos de dos dígitos hexadecimales
+  - `\x`  dígitos hexadecimales
+  - `\0o` dígitos octales
+- Las demás dan error de sintaxis aunque en **tagged templates** están permitidas. 
+
+- En Tagged templates se permiten todas
+## Metodos 
+### Iterar 
+- String.prototype[@@iterator]()
+### Obtener un carácter según el indice
+- `[String: 1 carácter] cadena.at(index)`
+- `[String: 1 carácter] cadena.charAt(index)`
+- Acceso a elementos del string como en un array: `"cadena"[2]` -> <samp>d</samp>
+### Obtener  código de carácter (UTF-16) según indice
+- `[entero 0-65535] cadena.charCodeAt(index)`
+- `[entero 0-65535] cadena.codePointAt(index)`
+#### Obtener la posición de  una subcadena dentro del string
+- `[index] cadena.indexOf(stringSearch)`
+- `[index] cadena.indexOf(stringSearch, posicion)`
+- `[index] cadena.lastIndexOf(stringSearch)`
+- `[index] cadena.lastIndexOf(stringSearch, posicion)`
+
+#### Convertir en  un string   una secuencia de enteros UTF-16  
+- `[string] String.fromCharCode(n1,..,nN)` n: entero 0-0x10FFFF
+- `[string] String.fromCharCode(n1)`
+- `[string] String.fromCharCode()`
+- `[string] String.fromCodePoint(n1,..,nN)`
+### Concatenar strings  
+- `[string_concatenado] cadena.prototype.concat()`
+- `[string_concatenado] cadena.prototype.concat(str1)`
+- `[string_concatenado] cadena.prototype.concat(str1,..,strN)`
+### Comprobar si una cadena incluye o  finaliza con una subcadena
+- `[true | false] cadena.endsWith(strSearch)`
+- `[true | false] cadena.endsWith(strSearch, endPos)`
+- `[true | false] cadena.includes(strSearch)`
+- `[true | false] cadena.includes(strSearch, position)`
+### Cadenas bien formadas(no contiene "lone surrogates")
+- `[true | false] cadena.isWellFormed()` 
+- `[string] cadena.toWellFormed()`
+### Comparar strings,  
+- `[entero] cadenaA.localeCompare(cadenaB)` Retorna un entero: 
+- `[entero] cadenaA.localeCompare(cadenaB, locales)`
+- `[entero] cadenaA.localeCompare(cadenaB, locales, options)`
+### Comparar un string con expresiones regulares
+- `[array] cadena.match(expresion regular)`
+- `[Array] cadena.matchAll(expresion regular)`
+>https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/matchAll
+### Reemplazar partes de un string
+- `[string] cadena.replace(patron, reemplazo)`
+- `[strimg] cadena.replaceAll(patron, reemplazo)`
+### Normalizar una cadena
+- `[string] cadena.normalize()`
+- `[string] cadena.normalize(form)` , form: "NFC", "NFD", "NFKC",   "NFKD"
+>https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/normalize
+
+### Obtener cadena sin procesar (raw, secuencias de escape)
+- `[string_raw] String.raw(cadena)`, el parámetro cadena 
+- `[string_raw] String.raw(cadena, sub1)`, 
+- `[string_raw] String.raw(cadena, sub1,..subN)`, 
+ - ``[string_raw] String.raw`templateLiteral` ``  {/*FIXME los backticks para code en md interfieren  */}
+```js 
+function tag(strings) {
+  console.log(strings.raw[0]);
+}
+tag`string text line 1 \n string text line 2`;
+```
+<pre><samp> "string text line 1 \n string text line 2"</samp></pre>
+```js 
+const html = String.raw;
+const doc = html`<canvas>\n</canvas>`;
+```
+> <IconLink url="https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/String/raw"/>
+> <IconLink url="https://ugwuraphael.medium.com/javascript-properties-and-methods-string-raw-1c99f6e33fac"/>
 
 
-String.prototype[@@iterator]()
-String.prototype.at()
-String.prototype.charAt()
-String.prototype.charCodeAt()
-String.prototype.codePointAt()
-String.prototype.concat()
-String.prototype.endsWith()
-String.fromCharCode()
-String.fromCodePoint()
-String.prototype.includes()
-String.prototype.indexOf()
-String.prototype.isWellFormed()
-String.prototype.lastIndexOf()
-String.prototype.localeCompare()
-String.prototype.match()
-String.prototype.matchAll()
-String.prototype.normalize()
-String.prototype.padEnd()
-String.prototype.padStart()
-String.raw()
-String.prototype.repeat()
-String.prototype.replace()
-String.prototype.replaceAll()
-String.prototype.search()
-String.prototype.slice()
-String.prototype.split()
-String.prototype.startsWith()
-String.prototype.substring()
-String.prototype.toLocaleLowerCase()
-String.prototype.toLocaleUpperCase()
-String.prototype.toLowerCase()
-String.prototype.toString()
-String.prototype.toUpperCase()
-String.prototype.toWellFormed()
-String.prototype.trim()
-String.prototype.trimEnd()
-String.prototype.trimStart()
-String.prototype.valueOf()
+### Búsqueda por indice
+- `[index] cadena.search(regexp)`, busca a partir de una expresión regular 
+
+### Transformar en array 
+- `[Array] cadena.split(separator)`
+- `[Array] cadena.split(separator, limit)`
+
+### Comprobar si una cadena comienza con un subcadena dada
+- `[true | false] cadena.startsWith(searchString)`, la cadena de búsqueda no puede ser una expresión regular
+- `[true | false] cadena.startsWith(searchString, position)` comprueba desde el indice position 
+```js 
+const str1 = 'Saturday night plans';
+console.log(str1.startsWith('Sat'));// true
+console.log(str1.startsWith('Sat', 3));// false
+```
+ 
+
+### Obtener una parte de la cadena entre dos indices
+
+- `[string] cadena.slice(indexStart)`, retorna una subcadena desde indexStart al final, NO modifica la cadena original. La cadena retornada es un string nuevo. 
+- `[string] cadena.slice(indexStart, indexEnd)`, desde indexStart hasta indexEnd -1
+  - indexStart >= cadena.length : subcadena = ""
+  - indexStart < 0: subcadena comienza en max(indexStart + str.length, 0)
+  - indexStart = omitido | undefined | NaN = 0
+  - indexEnd =  omitido | undefined | NaN | >= cadena.length = cadena.length-1
+  - indexEnd < 0 :  subcadena acaba en max(indexEnd + str.length, 0)
+  - indexEnd < = indexStart: subcadena = ""
+```js 
+const str1 = "The morning is upon us."; // The length of str1 is 23.
+const str2 = str1.slice(1, 8);
+const str3 = str1.slice(4, -2);
+const str4 = str1.slice(12);
+const str5 = str1.slice(30);
+console.log(str2); // he morn
+console.log(str3); // morning is upon u
+console.log(str4); // is upon us.
+console.log(str5); // ""
+```
+- `[string] cadena.substring(indexStart)` , extrae los caracteres desde esta posición hasta el final
+- `[string] cadena.substring(indexStart, indexEnd)`, se obtiene el string desde indexStart hasta indexEnd-1
+- indexStart = indexEnd: retorna ""
+- indexEnd > indexStart: se invierten ambos
+- valores menos que 0 se igualan a 0, mayores que la longitud de la cadena se igualan a esta
+- argumento = NaN = 0
+```js 
+const anyString = "abcdefghi";
+console.log(anyString.substring(0, 1)); // "a"
+console.log(anyString.substring(1, 0)); // "a"
+console.log(anyString.substring(0, 6)); // "abcdef"
+console.log(anyString.substring(4)); // "efghi"
+console.log(anyString.substring(4, 7)); // "efg"
+console.log(anyString.substring(7, 4)); // "efg"
+console.log(anyString.substring(0, 7)); //"abcdefg"
+console.log(anyString.substring(0, 12)); //"abcdefghi"
+```
+### Convertir a minúsculas o mayusculas
+- `[string] cadena.toLocaleLowerCase()`, convertir cadena a minúsculas
+- `[string] cadena.toLocaleLowerCase(local)`, local: 'en-EN', 'es-ES', define el idioma del texto, algunos idiomas tienen reglas sobre las minusculas/mayusculas
+- `[string] cadena.toLocaleUpperCase()`, convierte la cadena a mayusculas 
+- `[string] cadena.toLocaleUpperCase(local)`
+- `[string] cadena.toLowerCase()`
+- `[string] cadena.toUpperCase()`
+```js 
+const dotted = 'İstanbul';
+console.log(`EN-US: ${dotted.toLocaleLowerCase('en-US')}`);//  "EN-US: i̇stanbul"
+console.log(`TR: ${dotted.toLocaleLowerCase('tr')}`);//  "TR: istanbul"
+console.log(city.toLocaleUpperCase('en-US'));//  "ISTANBUL"
+console.log(city.toLocaleUpperCase('TR'));//  "İSTANBUL"
+```
+> <IconLink url="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl#locales_argument"/>
+###  Obtener una cadena a partir de un objeto
+- `[string] objecto.toString()`
+- `[string] object.valueOf()`
+```js 
+const x = new String("Hello world");
+console.log(x.toString()); // "Hello world"
+const stringObj = new String('foo');
+console.log(stringObj);// String { "foo" }
+console.log(stringObj.valueOf());//  "foo"
+```
+### Repetir (multiplicar) una cadena según un  entero,
+- `[string] cadena.repeat(count)`, count: nº de veces que se repite la cadena
+
+### Rellenar una cadena con caracteres dados
+- `[string] cadena.padEnd(longitud cadena resultante, string de relleno)`, desde el final
+- `[string] cadena..padStart(longitud cadena resultante, string de relleno)` desde el principio
+### Quitar espacios vacíos
+- `[string] cadena.trim()` , elimina espacios vacíos a en ambos extremos
+- `[string] cadena.trimEnd()`, los elimina del final
+- `[string] cadena.trimStart()`, del principio
+```js 
+console.log("   tengo espacios a los lados   ".trim()); //"tengo espacios a los lados"
+console.log("   tengo espacios a los lados   ".trimStart());//"tengo espacios a los lados   "
+console.log("   tengo espacios a los lados   ".trimEnd());//"tengo espacios a los lados   "
+```
+
+
+
+> ## Mas info:   
+> <IconLink url="https://developer.mozilla.org/en-US/docs/Learn/JavaScript/First_steps/Strings   "/>
+> <IconLink url="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String "/>
+> <IconLink url="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals  "/> 
+> <IconLink url="https://www.neoguias.com/template-literals-javascript/" />
+> <IconLink url="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_precedence#table"/>
+> <IconLink url="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Lexical_grammar#escape_sequences"/>
+> <IconLink url="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Text_formatting"/>
+> <IconLink url="https://developer.mozilla.org/en-US/docs/Learn/JavaScript/First_steps/Useful_string_methods"/>

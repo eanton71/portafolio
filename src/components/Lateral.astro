@@ -1,38 +1,71 @@
 ---
 const path = Astro.url.pathname;
+const url = Astro.url;
 //mostrar menu para pagina actual getHeadings astro
 const links = await Astro.glob("/src/pages/**/**.mdx");
+const { headings } = Astro.props;
 ---
 
 <style>
-   
   nav ul {
     list-style-type: none;
   }
   nav ul li {
   }
-   
   nav ul li:hover {
     background-color: aqua;
   }
+  .ancla2 {
+    font-size: medium;
+    color: black;
+    border: 1px solid aqua;
+  }
+
+  .ancla3 {
+    font-size: small;
+    border: 1px solid aqua;
+
+  }
+  .ancla4 {
+    font-size: smaller;
+    border: 1px solid aqua;
+  }
 </style>
 <aside class="lateral">
-    {path}
+  {path.split('/')[1]}
+ 
+  <details name="lateral-nav">
+    <summary>Indice {path}</summary>
   <nav>
     <ul>
-      {//recortar la url para que solo salga css o html
-        path !="/" ? (
-        links
-        //.filter((lnk) => lnk.url.split("/").length>=3 )
-         .filter((lnk) => lnk.url.includes(path.toString()))         
-          .map((link) => (
-            <li>
-              <a href={link.url + "/"}>{link.frontmatter.title} </a>
-            </li>
-          ))
-         ):""
+      {
+        //recortar la url para que solo salga css o html
+        path != "/"
+          ? links
+              //.filter((lnk) => lnk.url.split("/").length== 1)
+              .filter((lnk) => lnk.url.includes(path.toString()))
+              .map((link) => (
+                <li>
+                  <a href={link.url + "/"}>{link.frontmatter.title} </a>
+                </li>
+              ))
+          : ""
       }
     </ul>
   </nav>
+  </details>
+   <details open name="lateral-nav">
+    <summary>En este documento</summary>
+ 
+    {
+      headings.map((head) => (
+       
+          <a class={"ancla" + head.depth} href={"#" + head.slug}>
+            {'-'.repeat(head.depth-1)+' '+head.text}
+          </a>
+        <br>
+      ))
+    }
+ 
+  </details>
 </aside>
-
