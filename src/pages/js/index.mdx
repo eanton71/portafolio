@@ -8,6 +8,69 @@ import Article from "../../components/Article.astro";
 import Section from "../../components/Section.astro";
 //import "../../styles/semantica.css";
 
+- Javascript: lenguaje de script 
+- Creado para dar interactividad a las pagina web 
+- Los programas se escriben en trozos de codigo llamados scripts. 
+- Se pueden intergrar en el codigo html o en archivos externos ".js"
+- Se ejecutan en texto plano. No son compilados. Son interpretados
+## Historia
+- Javascript no tiene que ver nada con Java (o muy poco) 
+- Fue creado  en 1995 por Brendan Eich, con el nombre de "LiveScript" y se integro en el uso del navegador Netscape Navigator
+- Microsoft crea posteriormente JScript para Intenet Explorer 3.0 
+- En 1997 Ecma international publica el estandar ECMA-262 del lenguaje ECMAScript. El objetivo era tener un estandar comun para poder usar en todos los navegadores.
+- Surgen dialectos basados en este estandar, aparte de JScript, como ActionSCript de Adobe.
+- Se suceden diferentes versiones: 
+    - ES5 del 2009
+    - ES6 o ES2015, 2015
+    - Despues ha habido versiones anuales: ES2017, ES2018, ... 
+
+
+## Mas info 
+> https://web.dev/learn/javascript/introduction?hl=es-419
+> https://es.javascript.info/intro
+> https://developer.mozilla.org/en-US/docs/Learn/JavaScript/First_steps/What_is_JavaScript
+
+## Como funciona
+- El codigo es leido por el navegador junto con el resto delo contenido de la pagina web: html, css, imagenes,... 
+- Se lee cmo una secuencia de caracteres Unicode. 
+- El interprete, un vez recibe una secuencioa de comandos,    realiza un analisis lexico y oconvierte la cadena a: 
+    - tokens
+    - caracteres d control de formato
+    - terminadores de linea- comentarios
+    - espacios en blanco
+## Sintaxis 
+- Declaraciones 
+    - Instruciciones en una o varias  lineas de cocidgo que representan una accion: asignaiones de variables, 
+    - Las instruccioes deben terminar en punto y coma (no es obligatorio pero si recomendable)
+- Sentencias de bloque: condicionales, bucles, funciones. 
+- Expresión: unidad de codigo que genera un valor. 
+- Tipado debil: no es necesario declarar los datos con un tipo especifico. El interprete puede deducir el tipo a partir del contedo y su contexto (coerción de tipos) `"1" + 1 > `<samp>"11"</samp>.
+- Los tipos tambien se pueden convertir explicitamente mediante metoddos como toString(). 
+- Sensible al uso de mayusculas y minusculas (case sensitivity). No es lo mismo `console.log`que `console.Log` -> <samp>Error</samp>
+- Los espacios no son interpretados. 
+```js
+console.log(     "hola"   );console.log(   "adios"   );
+>"hola"
+>"adios"
+```
+- Si lo son cuando separan tokens  `let x`. Deben llevar al menos un espacio entre ellos. Tambien pueden llevar saltos de linea
+- El interprete de Javascript se encarga e eliminar los espaios innecesarios. Aunque esto es mas legible. 
+```js 
+let x = 1;
+let y = 2;
+if ( x == 2 ) {
+  //some behavior;
+}
+```
+- es interpretado asi:
+```js 
+let x=1;let y=2;if(x==2){}
+```
+- El uso de sangria y tabuladores es recomendable para mejorar la legibilidad del codigo aqunque el interprete no los necesite. 
+
+
+----
+
  ejemplos para estructuras de datos
  lifo fifo con autobus
  arrays con trenes 
