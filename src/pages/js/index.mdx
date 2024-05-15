@@ -1,11 +1,8 @@
 ---
 layout: ../../layouts/MDXLayout.astro
 title: JS
-slug: html
 ---
-import Aside from "../../components/Aside.astro";
-import Article from "../../components/Article.astro";
-import Section from "../../components/Section.astro";
+import IconLink from "../../components/IconLink.astro";
 //import "../../styles/semantica.css";
 
 - Javascript: lenguaje de script 
@@ -26,9 +23,9 @@ import Section from "../../components/Section.astro";
 
 
 ## Mas info 
-> https://web.dev/learn/javascript/introduction?hl=es-419
-> https://es.javascript.info/intro
-> https://developer.mozilla.org/en-US/docs/Learn/JavaScript/First_steps/What_is_JavaScript
+> <IconLink url="https://web.dev/learn/javascript/introduction?hl=es-419"/>
+> <IconLink url="https://es.javascript.info/intro"/>
+> <IconLink url="https://developer.mozilla.org/en-US/docs/Learn/JavaScript/First_steps/What_is_JavaScript"/>
 
 ## Como funciona
 - El codigo es leido por el navegador junto con el resto delo contenido de la pagina web: html, css, imagenes,... 
@@ -43,7 +40,7 @@ import Section from "../../components/Section.astro";
     - Instruciciones en una o varias  lineas de cocidgo que representan una accion: asignaiones de variables, 
     - Las instruccioes deben terminar en punto y coma (no es obligatorio pero si recomendable)
 - Sentencias de bloque: condicionales, bucles, funciones. 
-- Expresión: unidad de codigo que genera un valor. 
+- Expresión: unidad de codigo que genera un valor. Los parentess `()`  se usan para agrupar partes de una expresion para  que esta s eejecute de una vez, para hacerla mas legible o para sobreescribir el orden de operadores matematicos. 
 - Tipado debil: no es necesario declarar los datos con un tipo especifico. El interprete puede deducir el tipo a partir del contedo y su contexto (coerción de tipos) `"1" + 1 > `<samp>"11"</samp>.
 - Los tipos tambien se pueden convertir explicitamente mediante metoddos como toString(). 
 - Sensible al uso de mayusculas y minusculas (case sensitivity). No es lo mismo `console.log`que `console.Log` -> <samp>Error</samp>
@@ -67,6 +64,29 @@ if ( x == 2 ) {
 let x=1;let y=2;if(x==2){}
 ```
 - El uso de sangria y tabuladores es recomendable para mejorar la legibilidad del codigo aqunque el interprete no los necesite. 
+
+## Como se ejecuta 
+- El interprete de Jacvscript es llamado **motor o interprete de Javascript**.
+- Esta  integrado por lo general en navegadores, pero tambien puede estarlo en servidores o en algunos dispositivos.
+- Los motores que llevan los navegaddores tienen difrentes nombres:
+    - **V8**: Chrome, Opera, Edge.
+    - **SpiderMonkey**: Firefox. 
+    - **Chakra**: IE, **SquirrelFish** en Safari,...
+- Funcionamiento:
+    - El motor analiza el script.
+    - Lo compila a codigo maquina.
+    - Se ejecuta este codigo. 
+## Que puede hace Javascript 
+- Fue creado para su uso en navegadores por tanto no reuere acceso a recursos como memoria, CPU,...
+- Segun el entorno de ejecucion tiene distitnatas capacidades. Node.JS permite implementar un servidor y tiene acceso a archivos, realiazar solicitudes de red,..
+- En el navegador esta limitado a la manipulacion de la pagina web en la que esta integrada, interacciones con el usuario y el servidor web. 
+- Puede configurar cookies  que son unbos archivos limitados de configuracion o guardar datos en **local storage** limitados a una pagina web en concreto. 
+- No puede acceder al disco duro o a funciones del sistema operativo. uede trabajar con archivos de forma limitada y con permiso expreso del usuario . Acciones integradas en ciertas etiquetas html como `<input>`.
+- Se requiere permiso para hacer uso de camara, microfono y dispositivos que puedan ser de uso de la pagina web. Esta por si misma no puede activarlos. 
+- Desde un script de una pagina no se puede aceder  a la pestaña que este abierta en el navegador por parte de otra pagina . 
+- Esto se llama politica del mismo origen, ("Same Origin Policy"). Se pueden comunicar diferentes dominios pero mediante un protocolo especifico. 
+- Si no fuera asi, una pagina abierta en una pestaña podria acceder a otra que tuviera informacion personal de l usuario como el gestor de correo electronico. 
+
 
 
 ----

@@ -79,7 +79,9 @@ code ,samp{
     font-weight: 500;     
     font-family: 'Noto Sans Display';
 }
- 
+ p{
+    margin: 0.5em;
+ }
 em{
     background-color: rgb(230, 255, 236);
     border-radius: 1em;
@@ -102,3 +104,8 @@ blockquote{
     padding:1em;
     border: 1px solid hsl(110, 75%,55%);
 }
+tbody   tr td:first-child{ /*primera columna tabla*/
+    padding: 5px;
+    max-width: 20em;
+    
+} 

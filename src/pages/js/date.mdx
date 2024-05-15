@@ -1,0 +1,176 @@
+---
+layout: ../../layouts/MDXLayout.astro
+title: Fechas 
+---
+
+## Objeto Date
+- Los objetos Date encapsulan un número integral que representa milisegundos desde la medianoche del inicio del 
+1 de enero de 1970, UTC [epoch](https://tc39.es/ecma262/multipage/numbers-and-dates.html#sec-time-values-and-time-range).
+- El maximo representable se acerca al entero maximo ([Number.MAX_SAFE_INTEGER](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/MAX_SAFE_INTEGER)
+, 9,007,199,254,740,991). En total son ±8,640,000,000,000,000 milisegundos.
+- Por tanto se pueden representar fechas desde 20 de Abril 271821 AC a 13 de  Septiembre 13 de 275760 DC. Todo lo que este por debajo o enciam se
+representa por [`NaN`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NaN) por tanto `Invalid Date`.
+- La fecha se guarda como 'timestamp' (marca de tiempo), milisegundos transcurridos desde las 0 horas del 1 de Enero de 1970 hasta la fecha que se determina en los 
+parametros del constructor. Se puede representar como hora local o como UTC (tiempo universal coordinado). LA hora local es determinada por el equipo del usuario.
+- La marca de tiempo 0 corresponde a las 00:00 del 1 de Enero de 1970. Segun la hora local de Nueva York por ejemplo (UTC-5) 
+serian las 19:00 del 31 de Diciembre de 1969. 
+> UTC no es igual a GMT, varia segun 
+> el horario de verano o invierno
+### Date en formato string
+- `YYYY-MM-DDTHH:mm:ss.sssZ`
+- Al constriuir un objeto DAte se le pueden pasar una serie de parametros, si se añade uno con un valor por encima de su rango
+
+- YYYY : año con 4 digitos 0000 a 9999. Version expandida +/- seguido de 6 digitos
+- MM mes de  01 (por  defecto) a 12
+- DD, dia del mes 01 (por defecto) a 31
+- T caracter literal, indica el comienzo del elemento time 
+- HH hora en 2 digitos desde medianoche 00(por defecto) to 23 . As a special case, 24:00:00 is allowed, and is interpreted as midnight at the beginning of the next day. Defaults to 00.
+- mm, minutos 00 (por defecto) a 59
+- ss, segundos 00 (por defecto) a 59
+- sss, milisegundosis 000 (por defecto) a 999 
+- Z offset de zona horaria, puede ser z: UTC o + o - seguido de HH:mm, desfase en horas y minutos desde UTC 
+
+
+> https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date
+
+
+## Constructor
+- `new Date()` 
+- `new Date(value)`
+    - value: entero cno la marca de tiempo desde epoch ( 00:00 horas 1 de Enero 1970)
+
+- `new Date(dateString)`
+    - dateString: fecha en formato string (YYYY-MM-DDTHH:mm:ss.sssZ)
+    - Retorna un objeto Date. A partir de
+- `new Date(dateObject)`
+    - dateObject: objeto Date . Retorna:  una copia con la misma fecha y hora. 
+- `new Date(year, monthIndex)`    
+- `new Date(year, monthIndex, day)`
+- `new Date(year, monthIndex, day, hours)`
+- `new Date(year, monthIndex, day, hours, minutes)`
+- `new Date(year, monthIndex, day, hours, minutes, seconds)`
+- `new Date(year, monthIndex, day, hours, minutes, seconds, milliseconds)`
+- year: entero.  0-99 equiuvale a 1900-1999 por convencion. Los demas valores son tal como se ponen 
+- monthIndex: entero represntando el mes de  0 a 11
+- day: entero, dia del mes, por  defecto 1
+- hours: entero, de 0 a 23, por defecto 0
+- minutes: entero de 0 a 59 , por defecto 0
+- seconds: entero de 0 a 59, por defcto 0
+- milliseconds:entero , milesims de segundo, por defecto 0
+- Con la palabra reservada `new` retorna un objeto Date. Sin paametros retonra la fecha actual. Si se construye con parametros incorrectos 
+(mas o menos de 8,640,000,000,000,000 milisegundos) retorna "Invalid Date" con el metodo `toString()` , NaN con el metodo `valueOf()`. Si se usan parametros se construira un 
+objeto Date con estos y rellenara los demas con los valores por defecto. 
+- `Date()`
+- Retonmra una representacion en string de la fecha y hora actuales, de la misma manera de Date.toString(). Los argumentos que se le pasen sin la palabra 
+new seran ignorados
+## Metodos estaticos
+### Milisegundos desde epoch hast ahora
+- Date.now()
+- Retorna el numero de milisegundos traanscurridos desde el epoch (1 de Enero de 1970 UTC) hasta ahora
+### Milisegundos desde una fecha en string
+- Date.parse()
+- Retorna el timestamp (epoch) a partir de una fecha en formato string: YYYY-MM-DDTHH:mm:ss.sssZ
+- YYYY : año con 4 digitos 0000 a 9999. Version expandida +/- seguido de 6 digitos
+- MM mes de  01 (por  defecto) a 12
+- DD, dia del mes 01 (por defecto) a 31
+- T caracter literal, indica el comienzo del elemento time 
+- HH hora en 2 digitos desde medianoche 00(por defecto) to 23 . As a special case, 24:00:00 is allowed, and is interpreted as midnight at the beginning of the next day. Defaults to 00.
+- mm, minutos 00 (por defecto) a 59
+- ss, segundos 00 (por defecto) a 59
+- sss, milisegundosis 000 (por defecto) a 999 
+- Z offset de zona horaria, puede ser z: UTC o + o - seguido de HH:mm, desfase en horas y minutos desde UTC 
+
+https://tc39.es/ecma262/multipage/numbers-and-dates.html#sec-date-time-string-format
+### Date.UTC()
+- Retonra la marca de tiempo desde epoch
+- Difiere del constructor Date() en:
+    -  utiliza la hora universal en lugar de la hora local
+    - devuelve un valor de tiempo como un número en lugar de crear un objeto Date.
+    - Cuando se le pasa un solo número, Date.UTC() lo interpreta como un año en lugar de una marca de tiempo.
+- Si un parámetro está fuera del rango esperado, el método UTC() actualiza los otros parámetros para acomodar el valor. 
+Por ejemplo, si se utiliza 15 para monthIndex, el año se incrementará en 1 (año + 1) y se utilizará 3 para el mes.
+```js
+const utcDate1 = new Date(Date.UTC(2017));
+console.log(Date.UTC(2017));
+console.log(utcDate1);
+console.log(utcDate1.toUTCString());
+const utcDate = new Date(Date.UTC(2018, 11, 1, 0, 0, 0));
+console.log(utcDate);
+console.log(utcDate.toUTCString());
+```
+```shell
+> 1483228800000
+> Sun Jan 01 2017 01:00:00 GMT+0100 (hora estándar de Europa central)
+> "Sun, 01 Jan 2017 00:00:00 GMT"
+> Sat Dec 01 2018 01:00:00 GMT+0100 (hora estándar de Europa central)
+> "Sat, 01 Dec 2018 00:00:00 GMT"
+```
+## Metodos instanciados
+
+### fecha[@@toPrimitive]()
+### Año con cuatro cifras,  hora local
+- fecha.getFullYear()
+- fecha.setFullYear()
+### Mes en numero 0-11, hora local
+- fecha.getMonth()
+- fecha.setMonth()
+### Dia  del mes
+- fecha.getDate()
+- fecha.setDate()
+### Dia  de la semana, hora local
+- fecha.getDay()
+### Hora local 
+- fecha.getHours()
+- fecha.setHours()
+### Minutos, local
+- fecha.getMinutes()
+- fecha.setMinutes()
+### Segundos, hora local
+- fecha.getSeconds()
+- fecha.setSeconds()
+### Milisegundos, local
+- fecha.getMilliseconds()
+- fecha.setMilliseconds()
+### Milisegundos desde epoch (1-1-1970)
+- fecha.getTime()
+- fecha.setTime()
+### Diferencia en minutos fecha local con UTC
+- fecha.getTimezoneOffset()
+- Devuelve la diferencia entre la hora local y la hora UTC en minutos. 
+Depende de la ubicacion y de si el horario esde verano o invierno . Basicamente es el desfase entre la hora en la ubicacion del equipo del usuario 
+(varia segun invierno o verano) y el estandar UTC (no varia). 
+```js
+const date1 = new Date('August 19, 1975 23:15:30 GMT+07:00');
+const date2 = new Date('August 19, 1975 23:15:30 GMT-02:00');
+console.log(date1.getTimezoneOffset());
+console.log(date1.getTimezoneOffset() === date2.getTimezoneOffset());
+```
+```shell 
+> -120
+> true
+```
+- fecha.getUTCDate()
+- fecha.setUTCDate()
+- fecha.getUTCDay()
+- fecha.getUTCFullYear()
+- fecha.setUTCFullYear()
+- fecha.getUTCHours()
+- fecha.setUTCHours()
+- fecha.getUTCMilliseconds()
+- fecha.setUTCMilliseconds()
+- fecha.getUTCMinutes()
+- fecha.setUTCMinutes()
+- fecha.getUTCMonth()
+- fecha.setUTCMonth()
+- fecha.getUTCSeconds() 
+- fecha.setUTCSeconds() 
+- fecha.toDateString()
+- fecha.toISOString()
+- fecha.toJSON()
+- fecha.toLocaleDateString()
+- fecha.toLocaleString()
+- fecha.toLocaleTimeString()
+- fecha.toString()
+- fecha.toTimeString()
+- fecha.toUTCString()
+- fecha.valueOf()
